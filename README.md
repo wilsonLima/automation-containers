@@ -1,4 +1,4 @@
-automation_containers
+automation-containers
 =========
 
 Containers com ferramentas de automação e devops.
