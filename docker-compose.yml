@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  postgres:
+  postgres-sonar:
     image: postgres:11.5
-    container_name: postgres
+    container_name: postgres-sonar
     environment:
       - POSTGRES_USER=sonar
       - POSTGRES_PASSWORD=sonar
@@ -19,21 +19,21 @@ services:
     environment:
       - sonar.jdbc.username=sonar
       - jdbc.password=sonar
-      - sonar.jdbc.url=jdbc:postgresql://postgres:5432/sonar
+      - sonar.jdbc.url=jdbc:postgresql://postgres-sonar:5432/sonar
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_logs:/opt/sonarqube/logs
       - sonarqube_extensions:/opt/sonarqube/extensions
     depends_on: 
-      - postgres
+      - postgres-sonar
 
   jenkins:
     image: jenkins/jenkins:lts
     container_name: jenkins
     ports:
-      - 8080:8080
-      - 50000:50000
+      - 8082:8080
+      - 50002:50000
     volumes:
       - ./jenkins/jenkins_home:/var/jenkins_home
 
@@ -41,7 +41,7 @@ services:
     image: rundeck/rundeck:3.1.3
     container_name: rundeck
     ports:
-      - 4440:4440
+      - 4442:4440
     volumes:
       - ./rundeck/rundeck_data:/home/rundeck/server/data
 
