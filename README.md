@@ -6,10 +6,10 @@ Containers com ferramentas de automação e devops.
 Lista de ferramentas
 ------------
 
-- PostgreSQL versão 1.5  (Dependência do Sonarqube)
-- Sonarqube versão 7.9-community
+- PostgreSQL versão 13.2  (Dependência do Sonarqube)
+- Sonarqube versão 8.9.0-community
 - jenkins versão LTS
-- Rundeck versão 3.1.3
+- Rundeck versão 3.3.10
 
 
 Script para criar as pastas dos volumes

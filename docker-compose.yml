@@ -2,24 +2,26 @@ version: "3"
 
 services:
   postgres-sonar:
-    image: postgres:11.5
+    image: postgres:13.2
     container_name: postgres-sonar
     environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+      POSTGRES_HOST_AUTH_METHOD: password
     volumes:
       - ./postgresql/postgresql:/var/lib/postgresql
       - ./postgresql/postgresql_data:/var/lib/postgresql/data
 
   sonarqube:
-    image: sonarqube:7.9-community
+    image: sonarqube:8.9.0-community
     container_name: sonarqube
     ports:
       - 9002:9000
     environment:
-      - sonar.jdbc.username=sonar
-      - jdbc.password=sonar
-      - sonar.jdbc.url=jdbc:postgresql://postgres-sonar:5432/sonar
+      sonar.jdbc.username: sonar
+      sonar.jdbc.password: sonar
+      sonar.jdbc.url: jdbc:postgresql://postgres-sonar:5432/sonar
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
@@ -32,13 +34,13 @@ services:
     image: jenkins/jenkins:lts
     container_name: jenkins
     ports:
-      - 8082:8080
+      - 8083:8080
       - 50002:50000
     volumes:
       - ./jenkins/jenkins_home:/var/jenkins_home
 
   rundeck:
-    image: rundeck/rundeck:3.1.3
+    image: rundeck/rundeck:3.3.10
     container_name: rundeck
     ports:
       - 4442:4440
