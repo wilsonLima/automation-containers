@@ -1,6 +1,6 @@
 services:
   postgres-sonar:
-    image: postgres:15
+    image: postgres:17
     container_name: postgres-sonar
     environment:
       POSTGRES_USER: sonar
@@ -37,10 +37,10 @@ services:
       - jenkins_home_data:/var/jenkins_home
 
   rundeck:
-    image: rundeck/rundeck:5.18.0
+    image: rundeck/rundeck:5.20.0
     container_name: rundeck
     ports:
-      - 4442:4440
+      - 4440:4440
     volumes:
       - rundeck_data:/home/rundeck/server/data
 
